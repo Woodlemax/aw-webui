@@ -21,4 +21,11 @@ describe('router', () => {
     expect(workReportRoute).toBeTruthy();
     expect(typeof workReportRoute.component).toBe('function');
   });
+
+  test('includes the Pomodoro route', () => {
+    const pomodoroRoute = router.options.routes.find(route => route.path === '/pomodoro');
+
+    expect(pomodoroRoute).toBeTruthy();
+    expect(typeof pomodoroRoute.component).toBe('function');
+  });
 });

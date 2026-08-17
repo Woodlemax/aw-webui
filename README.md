@@ -32,6 +32,9 @@ You might have to configure CORS for it to work, see the CORS section below.
 
 You may also want to generate fake data so you have something to test with, see: https://github.com/ActivityWatch/aw-fakedata/
 
+The fork also contains a Pomodoro page backed by the companion `aw-notify`
+service. See [Pomodoro page](docs/pomodoro.md) for setup and manual checks.
+
 ## Building
 
 To build the production bundle, simply run the following:
