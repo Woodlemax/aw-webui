@@ -18,6 +18,7 @@ const Settings = () => import('./views/settings/Settings.vue');
 // redirect, so no direct reference here. Keeping the import out avoids
 // pulling a second copy into a separate chunk.
 const Stopwatch = () => import('./views/Stopwatch.vue');
+const Pomodoro = () => import('./views/Pomodoro.vue');
 const WorkReport = () => import('./views/WorkReport.vue');
 const AISummaryView = () => import('./views/AISummaryView.vue');
 const Alerts = () => import('./views/Alerts.vue');
@@ -77,11 +78,12 @@ const router = new VueRouter({
     // The matcher excludes 'category-builder' so the more specific route above
     // wins; new groups added in Settings.vue should also be added here.
     {
-      path: '/settings/:group(general|appearance|categorization|privacy|developer)',
+      path: '/settings/:group(general|appearance|categorization|notifications|privacy|developer)',
       component: Settings,
       props: true,
     },
     { path: '/stopwatch', component: Stopwatch },
+    { path: '/pomodoro', component: Pomodoro },
     { path: '/work-report', component: WorkReport },
     { path: '/analysis/activity', component: AISummaryView },
     { path: '/search', component: Search },

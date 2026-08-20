@@ -21,4 +21,19 @@ describe('router', () => {
     expect(workReportRoute).toBeTruthy();
     expect(typeof workReportRoute.component).toBe('function');
   });
+
+  test('includes the Pomodoro route', () => {
+    const pomodoroRoute = router.options.routes.find(route => route.path === '/pomodoro');
+
+    expect(pomodoroRoute).toBeTruthy();
+    expect(typeof pomodoroRoute.component).toBe('function');
+  });
+
+  test('resolves the notifications settings group', () => {
+    const resolved = router.resolve('/settings/notifications').route;
+
+    expect(resolved.params.group).toBe('notifications');
+    expect(resolved.matched.some(record => record.path.includes(':group'))).toBe(true);
+    expect(resolved.matched.some(record => record.path === '*')).toBe(false);
+  });
 });

@@ -11,6 +11,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const LOCALES_DIR = path.join(__dirname, '../src/i18n/locales');
 const LOCALES = ['en', 'uk', 'de', 'ru', 'zh-CN'];
 
+// Features can intentionally ship in a documented subset of languages and use
+// Vue I18n's English fallback for the rest. Keep these exceptions narrow so
+// unrelated missing translations are still reported.
+const INTENTIONAL_FALLBACK_PREFIXES = {
+  uk: ['pomodoro.'],
+  de: ['pomodoro.'],
+  'zh-CN': ['pomodoro.'],
+};
+
 /** Substrings: identical en/value is OK when value contains any of these (case-insensitive). */
 const ALLOWLIST_SUBSTRINGS = [
   'activitywatch',
@@ -140,7 +149,10 @@ for (const code of LOCALES) {
   const enKeys = new Set(Object.keys(enFlat));
   const keys = new Set(Object.keys(flat));
 
-  const missing = [...enKeys].filter(k => !keys.has(k));
+  const fallbackPrefixes = INTENTIONAL_FALLBACK_PREFIXES[code] || [];
+  const missing = [...enKeys].filter(
+    k => !keys.has(k) && !fallbackPrefixes.some(prefix => k.startsWith(prefix))
+  );
   const extra = [...keys].filter(k => !enKeys.has(k));
 
   if (missing.length) {

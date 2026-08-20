@@ -73,4 +73,10 @@ describe('i18n', () => {
     expect(document.documentElement.lang).toBe('en');
     expect(localStorage.getItem('locale')).toBe('en');
   });
+
+  test('Pomodoro has dedicated English and Russian translations', () => {
+    const { i18n } = loadI18n();
+    expect(i18n.t('pomodoro.title', 'en')).toBe('Pomodoro');
+    expect(i18n.t('pomodoro.title', 'ru')).toBe('Томато');
+  });
 });
